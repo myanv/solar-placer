@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"></style>
+    <title>CA1D</title>
+</head>
+<body>
+    <div id="options">
+        <h1>Cellular MiniMata</h1>
+        <h3>@myanv</h3>
+        <label for="rows">Enter the number of rows:</label>
+        <input type="number" name="rows" id="rows" value="25">
+        <label for="columns">Enter the number of columns:</label>
+        <input type="number" name="columns" id="columns" value="25">
+        <label for="resolution">Enter the resolution:</label>
+        <input type="number" name="resolution" id="resolution" value="45">
+        <label for="steps">Enter the number of steps:</label>
+        <input type="number" name="steps" id="steps" value="250">
+        <label for="rules">Enter the rules (for more info on the format, see the project's GitHub README):</label>
+        <textarea name="rules" id="rules" cols="26" rows="8">alive &lt;2 dead&#13;&#10;alive ==2,3 alive&#13;&#10;alive &gt;3 dead&#13;&#10;dead ==3 alive</textarea>
+        <button id="get-blank">Get blank grid</button>
+        <button id="get-grid">Get random grid</button>
+        <button id="start-btn">Start simulation</button>
+    </div>
+
+    <!-- JavaScript files, including p5.js -->
+    <script src = "rectangles.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+</body>
+</html>
