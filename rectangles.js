@@ -2,20 +2,18 @@
 // Adapted from my cellular automata project: @ https://github.com/myanv/cellular-minimata
 
 // Get the start button and define the canvas
-const startButton = document.getElementById("start-btn");
-const gridButton = document.getElementById("get-grid");
-const newButton = document.getElementById("get-blank");
+const placementButton = document.getElementById("get-placement");
 
 class SolarPlacer {
-    constructor(areaWidth, areaHeight, rectWidth, rectHeight, obstacles) {
-      this.areaWidth = areaWidth;
-      this.areaHeight = areaHeight;
-      this.rectWidth = rectWidth;
-      this.rectHeight = rectHeight;
+    constructor(containerWidth, containerHeight, panelWidth, panelHeight, obstacles) {
+      this.containerWidth = containerWidth;
+      this.containerHeight = containerHeight;
+      this.panelWidth = panelWidth;
+      this.panelHeight = panelHeight;
       this.obstacles = obstacles;
       
-      this.cols = Math.floor(areaWidth / rectWidth);
-      this.rows = Math.floor(areaHeight / rectHeight);
+      this.cols = Math.floor(containerWidth / panelWidth);
+      this.rows = Math.floor(containerHeight / panelHeight);
       this.grid = this.createGrid();
     }
 
@@ -37,10 +35,10 @@ class SolarPlacer {
   
     markObstacles() {
       this.obstacles.forEach(obstacle => {
-        const startRow = Math.floor(obstacle.y / this.rectHeight);
-        const endRow = Math.ceil((obstacle.y + obstacle.height) / this.rectHeight);
-        const startCol = Math.floor(obstacle.x / this.rectWidth);
-        const endCol = Math.ceil((obstacle.x + obstacle.width) / this.rectWidth);
+        const startRow = Math.floor(obstacle.y / this.panelHeight);
+        const endRow = Math.ceil((obstacle.y + obstacle.height) / this.panelHeight);
+        const startCol = Math.floor(obstacle.x / this.panelWidth);
+        const endCol = Math.ceil((obstacle.x + obstacle.width) / this.panelWidth);
   
         for (let row = startRow; row < endRow; row++) {
           for (let col = startCol; col < endCol; col++) {
@@ -59,10 +57,10 @@ class SolarPlacer {
         for (let col = 0; col < this.cols; col++) {
           if (this.grid[row][col] == 0) {
             solarPanels.push({
-              x: col * this.rectWidth,
-              y: row * this.rectHeight,
-              width: this.rectWidth,
-              height: this.rectHeight
+              x: col * this.panelWidth,
+              y: row * this.panelHeight,
+              width: this.panelWidth,
+              height: this.panelHeight
             });
             this.grid[row][col] = 2;
           }
@@ -76,26 +74,41 @@ class SolarPlacer {
       this.markObstacles();
       return this.markSolarPanels();
     }
-  }
+}
+
+/* Default parameter values */
+let containerWidth = 800;
+let containerHeight = 600;
+let panelWidth = 150;
+let panelHeight = 50;
+let obstacles = [
+  { x: 100, y: 100, width: 20, height: 150 },
+  { x: 500, y: 300, width: 150, height: 20 }
+];
+
+let placer = new SolarPlacer(containerWidth, containerHeight, panelWidth, panelHeight, obstacles);
+let solarPanels = placer.run();
 
 // p5.js setup function, defining the default canvas and grid
 async function setup() {    
-    createCanvas(areaWidth, areaHeight);
+    createCanvas(containerWidth, containerHeight);
     const canvas = document.getElementById("defaultCanvas0");
     background(235);
     draw();
 }
 
-// Function to create a new blank grid when the new grid button is clicked
-newButton.addEventListener("click", async () => {
-    background(235);
-    rows = document.getElementById("rows").valueAsNumber;
-    columns = document.getElementById("columns").valueAsNumber;
-    resolution = document.getElementById("resolution").valueAsNumber;
-    const width = columns * resolution;
-    const height = rows * resolution;
 
-    resizeCanvas(width, height);
+// Function to create a new blank grid when the new grid button is clicked
+placementButton.addEventListener("click", async () => {
+    background(235);
+    containerHeight = document.getElementById("container-height").valueAsNumber;
+    containerWidth = document.getElementById("container-width").valueAsNumber;
+    panelWidth = document.getElementById("panel-width").valueAsNumber;
+    panelHeight = document.getElementById("panel-height").valueAsNumber;
+
+    resizeCanvas(containerHeight, containerWidth);
+    placer = new SolarPlacer(containerWidth, containerHeight, panelWidth, panelHeight, obstacles);
+    solarPanels = placer.run();
     draw();
 })
 
@@ -104,11 +117,11 @@ function draw() {
     for (let i = 0; i < placer.rows; i++) {
         for (let j = 0; j < placer.cols; j++) {
             if (placer.grid[i][j] == 2) {
-                let y = i * placer.rectHeight;
-                let x = j * placer.rectWidth;
+                let y = i * placer.panelHeight;
+                let x = j * placer.panelWidth;
                 fill(0);
                 stroke(255);
-                rect(x, y, placer.rectWidth, placer.rectHeight);
+                rect(x, y, placer.panelWidth, placer.panelHeight);
             }
         }
     }

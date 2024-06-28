@@ -8,21 +8,18 @@
 </head>
 <body>
     <div id="options">
-        <h1>Cellular MiniMata</h1>
+        <h1>Solar Placer</h1>
         <h3>@myanv</h3>
-        <label for="rows">Enter the number of rows:</label>
-        <input type="number" name="rows" id="rows" value="25">
-        <label for="columns">Enter the number of columns:</label>
-        <input type="number" name="columns" id="columns" value="25">
-        <label for="resolution">Enter the resolution:</label>
-        <input type="number" name="resolution" id="resolution" value="45">
-        <label for="steps">Enter the number of steps:</label>
-        <input type="number" name="steps" id="steps" value="250">
-        <label for="rules">Enter the rules (for more info on the format, see the project's GitHub README):</label>
-        <textarea name="rules" id="rules" cols="26" rows="8">alive &lt;2 dead&#13;&#10;alive ==2,3 alive&#13;&#10;alive &gt;3 dead&#13;&#10;dead ==3 alive</textarea>
-        <button id="get-blank">Get blank grid</button>
-        <button id="get-grid">Get random grid</button>
-        <button id="start-btn">Start simulation</button>
+        <label for="container-height">Enter the height of the container:</label>
+        <input type="number" name="container-height" id="container-height" value="600">
+        <label for="container-width">Enter the width of the container:</label>
+        <input type="number" name="container-width" id="container-width" value="800">
+        <label for="panel-height">Enter the height of the rectangular solar panels:</label>
+        <input type="number" name="panel-height" id="panel-height" value="50">
+        <label for="panel-width">Enter the width of the rectangular solar panels:</label>
+        <input type="number" name="panel-width" id="panel-width" value="150">
+        
+        <button id="get-placement">Get solar panel placement</button>
     </div>
 
     <!-- JavaScript files, including p5.js -->

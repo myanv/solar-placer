@@ -1,58 +1,10 @@
-/*
-body {
-    height: 100vh;
-    margin: 0;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-#options {
-    z-index: 99;
-    width: 250px;
-    height: 100vh;
-    background-image: linear-gradient(rgb(164, 224, 220), rgb(164, 183, 226));
-    float: left;
-    display: fixed;
-    padding-left: 10px;
-}
-
-input {
-    width: 200px;
-}
-
-h1 {
-    margin-top: 20px;
-    margin-bottom: 0;
-}
-
-h3 {
-    margin-top: 5px;
-    margin-bottom: 20px;
-}
-
-input, textarea, button {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    border-radius: 5px;
-}
-
 label {
     display: block;
-    margin: 3px 0;
+    margin: 5px 0;
 }
 
 button {
     display: block;
-    padding: 8px;
-    font-weight: bold;
+    margin: 5px 0;
 }
 
-button:hover {
-    background-color: rgb(215, 221, 249);
-}
-
-canvas {
-    position: fixed;
-    overflow: hidden;
-    padding-left:50px;
-}
-*/
