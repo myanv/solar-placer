@@ -77,26 +77,24 @@ class SolarPlacer {
 }
 
 /* Default parameter values */
-let containerWidth = 800;
-let containerHeight = 600;
-let panelWidth = 150;
-let panelHeight = 50;
-let obstacles = [
+var containerWidth = 800;
+var containerHeight = 600;
+var panelWidth = 150;
+var panelHeight = 50;
+var obstacles = [
   { x: 100, y: 100, width: 20, height: 150 },
   { x: 500, y: 300, width: 150, height: 20 }
 ];
 
-let placer = new SolarPlacer(containerWidth, containerHeight, panelWidth, panelHeight, obstacles);
-let solarPanels = placer.run();
+var placer = new SolarPlacer(containerWidth, containerHeight, panelWidth, panelHeight, obstacles);
+var solarPanels = placer.run();
 
 // p5.js setup function, defining the default canvas and grid
 async function setup() {    
-    createCanvas(containerWidth, containerHeight);
-    const canvas = document.getElementById("defaultCanvas0");
-    background(235);
+    createCanvas(1300, 1000);
+    background(255);
     draw();
 }
-
 
 // Function to create a new blank grid when the new grid button is clicked
 placementButton.addEventListener("click", async () => {
@@ -105,8 +103,10 @@ placementButton.addEventListener("click", async () => {
     containerWidth = document.getElementById("container-width").valueAsNumber;
     panelWidth = document.getElementById("panel-width").valueAsNumber;
     panelHeight = document.getElementById("panel-height").valueAsNumber;
+    numObstacles = document.getElementById("num-obstacles").valueAsNumber;
 
-    resizeCanvas(containerHeight, containerWidth);
+    obstacles = getRandomObstacles(numObstacles);
+
     placer = new SolarPlacer(containerWidth, containerHeight, panelWidth, panelHeight, obstacles);
     solarPanels = placer.run();
     draw();
@@ -122,7 +122,27 @@ function draw() {
                 fill(0);
                 stroke(255);
                 rect(x, y, placer.panelWidth, placer.panelHeight);
-            }
+            } 
         }
     }
+    fill(255, 0, 0, 100); 
+    stroke(255, 0, 0);
+    for (let obstacle of obstacles) {
+        rect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    }
+}
+
+function getRandomObstacles(numObstacles) {
+  let obstacle = [];
+  for (let i = 0; i < numObstacles; i++) {
+    let randomObstacle = {
+      x: Math.floor((Math.random() * placer.rows) + 1) * placer.panelWidth,
+      y: Math.floor((Math.random() * placer.cols) + 1) * placer.panelHeight,
+      width: Math.floor((Math.random() * containerWidth / 2) + 1),
+      height: Math.floor((Math.random() * containerHeight / 2) + 1),
+    }
+    obstacle.push(randomObstacle);
+  }
+  console.log(obstacle);
+  return obstacle;
 }
