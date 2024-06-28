@@ -136,11 +136,11 @@ function getRandomObstacles(numObstacles) {
   let obstacle = [];
   for (let i = 0; i < numObstacles; i++) {
     let randomObstacle = {
-      x: Math.floor((Math.random() * placer.rows) + 1) * placer.panelWidth,
-      y: Math.floor((Math.random() * placer.cols) + 1) * placer.panelHeight,
-      width: Math.floor((Math.random() * containerWidth / 2) + 1),
-      height: Math.floor((Math.random() * containerHeight / 2) + 1),
-    }
+      x: Math.floor(Math.random() * (containerWidth - placer.panelWidth)),
+      y: Math.floor(Math.random() * (containerHeight - placer.panelHeight)),
+      width: Math.floor(Math.random() * (containerWidth / 4) + placer.panelWidth),
+      height: Math.floor(Math.random() * (containerHeight / 4) + placer.panelHeight),
+    };
     obstacle.push(randomObstacle);
   }
   console.log(obstacle);
